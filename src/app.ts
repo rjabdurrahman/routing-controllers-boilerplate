@@ -19,7 +19,6 @@ useExpressServer(app, {
   routePrefix: '/api/v1',
   authorizationChecker: async (action: Action, roles: string[]) => {
     const token = action.request.headers['authorization'];
-    console.log(action.request.headers)
     console.log('Token', token);
     if(token == 1) return true;
     else return false;
