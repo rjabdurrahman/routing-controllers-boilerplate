@@ -1,15 +1,17 @@
-import { JsonController, Get, Session } from "routing-controllers";
+import { JsonController, Get, Session, Authorized, CurrentUser } from "routing-controllers";
 import { Service } from "typedi";
 import { DataService } from "../services/DataService";
 
+@Authorized()
 @Service()
-@JsonController("/")
+@JsonController("/data")
 export class ExampleController {
   
   constructor(private dataService: DataService) { }
 
-  @Get("/data")
-  getExample(@Session() session: any) {
+  @Get("/")
+  getExample(@CurrentUser() user: any, @Session() session: any) {
+    console.log(user);
     console.log(session.name);
     return this.dataService.getUsers();
   }

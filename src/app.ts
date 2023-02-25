@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { useExpressServer } from "routing-controllers";
+import { Action, useExpressServer } from "routing-controllers";
 import { useContainer } from "routing-controllers";
 import { Container } from "typedi";
 import { ExampleController } from "./controllers/ExampleController";
@@ -16,6 +16,18 @@ app.use(expressSession(sessionConfig))
 useExpressServer(app, {
   development: false,
   cors: true,
+  routePrefix: '/api/v1',
+  authorizationChecker: async (action: Action, roles: string[]) => {
+    const token = action.request.headers['authorization'];
+    console.log(action.request.headers)
+    console.log('Token', token);
+    if(token == 1) return true;
+    else return false;
+  },
+  currentUserChecker: async (action: Action) => {
+    const token = action.request.headers['authorization'];
+    return 'User' + token;
+  },
   controllers: [ExampleController],
   middlewares: [ErrorHandler]
 })
