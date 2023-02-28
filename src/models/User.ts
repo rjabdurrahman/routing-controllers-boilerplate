@@ -1,9 +1,16 @@
 import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
-@Table({ timestamps: false, tableName: 'users' })
+@Table({
+  tableName: 'users',
+  timestamps: false,
+  
+})
 export class User extends Model<User> {
 
-  @Column({ primaryKey: true, autoIncrement: true })
+  @Column({
+    primaryKey: true,
+    autoIncrement: true,
+  })
   id: number;
 
   @Column

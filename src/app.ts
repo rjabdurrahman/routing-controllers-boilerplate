@@ -8,18 +8,10 @@ import { ErrorHandler } from "./middlewares/ErrorHandler";
 import express from 'express';
 import expressSession from 'express-session';
 import { sessionConfig } from "./config/session";
-import { sequelize } from "./config/db";
+import connectDB from "./config/db";
 
 useContainer(Container);
-
-(async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-})();
+connectDB();
 
 const app = express();
 app.use(expressSession(sessionConfig))

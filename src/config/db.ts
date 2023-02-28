@@ -11,3 +11,15 @@ export const sequelize = new Sequelize({
   models: [User],
   logging: false,
 });
+
+export default async function connectDB() {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+    sequelize.sync({
+      alter: true
+    })
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+}
