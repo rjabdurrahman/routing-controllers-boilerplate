@@ -1,9 +1,9 @@
-import { Controller, Get } from 'routing-controllers';
+import { Body, Get, JsonController, Post } from 'routing-controllers';
 import { Service } from 'typedi';
 import { User } from '../models/User';
 
 @Service()
-@Controller()
+@JsonController()
 export class UserController {
 
   @Get('/users')
@@ -11,6 +11,12 @@ export class UserController {
     return await User.findAll({
         raw: true
     });
+  }
+
+  @Post('/user')
+  async create(@Body() body: any): Promise<User[]> {
+    let result = await User.create(body);
+    return (result as any)?.toJSON();
   }
 
 }

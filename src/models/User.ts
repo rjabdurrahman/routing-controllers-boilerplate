@@ -1,4 +1,9 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType
+} from 'sequelize-typescript';
 
 @Table({
   tableName: 'users',
@@ -29,7 +34,8 @@ export class User extends Model<User> {
   status: number;
   
   @Column({
-    type: DataType.DATE
+    type: DataType.DATE,
+    defaultValue: DataType.NOW,
   })
   created_at: Date;
 
