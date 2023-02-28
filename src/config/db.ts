@@ -9,4 +9,5 @@ export const sequelize = new Sequelize({
   host: 'localhost',
   port: 3306,
   models: [User],
+  logging: false,
 });
