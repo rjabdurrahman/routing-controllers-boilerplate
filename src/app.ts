@@ -1,5 +1,6 @@
 import "dotenv/config";
 import "reflect-metadata";
+import path from "path";
 import { Action, useExpressServer } from "routing-controllers";
 import { useContainer } from "routing-controllers";
 import { Container } from "typedi";
@@ -12,7 +13,7 @@ import { sessionConfig } from "./config/session";
 useContainer(Container);
 
 const app = express();
-app.use(expressSession(sessionConfig))
+app.use(expressSession(sessionConfig));
 
 useExpressServer(app, {
   development: false,
@@ -31,5 +32,7 @@ useExpressServer(app, {
   controllers: [ExampleController],
   middlewares: [ErrorHandler]
 })
+
+app.use(/^(?!\/?api).+$/, express.static(path.join(__dirname, 'public')));
 
 app.listen(3000, () => console.log(`Listening on http://localhost:3000`))
