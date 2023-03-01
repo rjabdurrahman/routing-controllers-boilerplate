@@ -9,7 +9,7 @@ import { ErrorHandler } from "./middlewares/ErrorHandler";
 import express from 'express';
 import expressSession from 'express-session';
 import { sessionConfig } from "./config/session";
-import connectDB from "./config/db";
+import { connectDB } from "./config/db";
 
 useContainer(Container);
 connectDB();
