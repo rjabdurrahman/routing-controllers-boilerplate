@@ -1,18 +1,27 @@
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../models/User';
-
 export const sequelize = new Sequelize({
   dialect: 'mysql',
-  database: 'data_entry_hub',
-  username: 'root',
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
   password: '',
-  host: 'localhost',
+  database: process.env.DB_NAME,
   port: 3306,
   models: [User],
   logging: false,
 });
 
-export default async function connectDB() {
+export async function connectDB() {
+  console.log({
+    dialect: 'mysql',
+    host: process.env.DB_HOST,
+    username: process.env.DB_USER,
+    password: '',
+    database: process.env.DB_NAME,
+    port: 3306,
+    models: [User],
+    logging: false,
+  })
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
