@@ -12,16 +12,6 @@ export const sequelize = new Sequelize({
 });
 
 export async function connectDB() {
-  console.log({
-    dialect: 'mysql',
-    host: process.env.DB_HOST,
-    username: process.env.DB_USER,
-    password: '',
-    database: process.env.DB_NAME,
-    port: 3306,
-    models: [User],
-    logging: false,
-  })
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
