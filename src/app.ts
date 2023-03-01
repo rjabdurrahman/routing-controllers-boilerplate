@@ -1,3 +1,4 @@
+import "dotenv/config";
 import "reflect-metadata";
 import { Action, useExpressServer } from "routing-controllers";
 import { useContainer } from "routing-controllers";
